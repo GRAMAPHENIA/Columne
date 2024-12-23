@@ -59,8 +59,8 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
         />
         {photoPreview && (
           <Image
-            width={200}
-            height={200}
+          width={200}
+          height={200}
             src={photoPreview}
             alt="Vista previa"
             className="w-full mb-2 rounded-lg"

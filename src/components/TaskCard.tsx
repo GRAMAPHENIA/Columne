@@ -23,7 +23,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete }) => {
 
   return (
     <div
-      className="kanban-task transition-all bg-gray-900/80 hover:bg-gray-800/50 p-4 rounded-lg shadow-md cursor-move"
+      className="kanban-task transition-all bg-gray-900/80 hover:bg-gray-800/50 p-4 rounded-lg shadow-md cursor-move my-4"
       draggable
       onDragStart={(event) => handleDragStart(event, task.id)}
       onDragEnd={handleDragEnd}
