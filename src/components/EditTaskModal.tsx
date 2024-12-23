@@ -28,7 +28,7 @@ export const EditTaskModal: React.FC<EditTaskModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-gray-900/70 backdrop-blur-xl flex items-center justify-center z-50">
-      <div className="add-task bg-gray-900/50 rounded-lg  p-6 shadow-lg w-96 border border-gray-700">
+      <div className="add-task bg-gray-900/50 rounded-lg p-6 shadow-lg w-96 border border-gray-700">
         <h2 className="text-xl font-bold mb-4">Editar Tarea</h2>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Título</label>

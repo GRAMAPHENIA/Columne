@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Task } from "../types/task";
 import TrashIcon from "./Trash";
+import Pencil from "./Pencil";
 import Image from "next/image";
 
 interface TaskCardProps {
@@ -9,7 +10,11 @@ interface TaskCardProps {
   onEdit: (task: Task) => void;
 }
 
-export const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete, onEdit }) => {
+export const TaskCard: React.FC<TaskCardProps> = ({
+  task,
+  onDelete,
+  onEdit,
+}) => {
   const [message, setMessage] = useState<string | null>(null);
 
   const handleDragStart = (
@@ -38,7 +43,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete, onEdit }) =>
 
   return (
     <div
-      className="kanban-task transition-all bg-gray-900/80 hover:bg-gray-800/50 p-4 rounded-lg shadow-md cursor-move my-4"
+      className="kanban-task transition-all bg-gray-900/80 hover:bg-gray-800/50 p-4 rounded-lg shadow-md cursor-move my-4 border border-gray-700/50"
       draggable
       onDragStart={(event) => handleDragStart(event, task.id)}
       onDragEnd={handleDragEnd}
@@ -50,17 +55,17 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete, onEdit }) =>
           height={200}
           src={task.photoUrl}
           alt={task.title}
-          className="w-full h-32 object-cover rounded-lg mb-4"
+          className="w-full h-32 object-cover rounded-md mb-4"
         />
       )}
       <h3 className="font-semibold text-white">{task.title}</h3>
       <p className="text-sm text-gray-300">{task.description}</p>
-      <div className="flex justify-between mt-2">
+      <div className="flex justify-end mt-4 space-x-4">
         <button
           className="text-blue-400/90 text-sm hover:text-blue-400 bg-blue-500/30 hover:bg-blue-500/40 p-2 rounded-sm"
           onClick={() => onEdit(task)}
         >
-          Editar
+          <Pencil />
         </button>
         <button
           className="text-red-400/90 text-sm hover:text-red-400 bg-red-500/30 hover:bg-red-500/40 p-2 rounded-sm"
