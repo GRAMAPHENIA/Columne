@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Task } from "../types/task";
 import TrashIcon from "./Trash";
 import Image from "next/image";
@@ -6,9 +6,12 @@ import Image from "next/image";
 interface TaskCardProps {
   task: Task;
   onDelete: (taskId: string) => void;
+  onEdit: (task: Task) => void;
 }
 
-export const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete }) => {
+export const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete, onEdit }) => {
+  const [message, setMessage] = useState<string | null>(null);
+
   const handleDragStart = (
     event: React.DragEvent<HTMLDivElement>,
     taskId: string
@@ -19,6 +22,18 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete }) => {
 
   const handleDragEnd = (event: React.DragEvent<HTMLDivElement>) => {
     (event.target as HTMLElement).classList.remove("dragging");
+  };
+
+  const handleDelete = (taskId: string) => {
+    try {
+      onDelete(taskId); // Eliminar tarea
+      setMessage("Tarea eliminada con éxito."); // Mensaje de éxito
+    } catch {
+      setMessage("Hubo un error al eliminar la tarea."); // Mensaje de error
+    }
+
+    // Borrar el mensaje después de 3 segundos
+    setTimeout(() => setMessage(null), 3000);
   };
 
   return (
@@ -40,12 +55,25 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete }) => {
       )}
       <h3 className="font-semibold text-white">{task.title}</h3>
       <p className="text-sm text-gray-300">{task.description}</p>
-      <button
-        className="text-red-400/90 mt-2 text-sm hover:text-red-400 bg-red-500/30 hover:bg-red-500/40 p-2 rounded-sm"
-        onClick={() => onDelete(task.id)}
-      >
-        <TrashIcon />
-      </button>
+      <div className="flex justify-between mt-2">
+        <button
+          className="text-blue-400/90 text-sm hover:text-blue-400 bg-blue-500/30 hover:bg-blue-500/40 p-2 rounded-sm"
+          onClick={() => onEdit(task)}
+        >
+          Editar
+        </button>
+        <button
+          className="text-red-400/90 text-sm hover:text-red-400 bg-red-500/30 hover:bg-red-500/40 p-2 rounded-sm"
+          onClick={() => handleDelete(task.id)}
+        >
+          <TrashIcon />
+        </button>
+      </div>
+      {message && (
+        <div className="mt-2 text-sm text-white bg-gray-700 p-2 rounded">
+          {message}
+        </div>
+      )}
     </div>
   );
 };

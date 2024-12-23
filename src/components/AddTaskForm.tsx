@@ -32,7 +32,7 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
   };
 
   return (
-    <div className="add-task bg-gray-900/50 p-4 rounded-lg shadow-md w-1/4">
+    <div className="add-task bg-gray-900/50 p-4 rounded-lg shadow-md w-full">
       <h3 className="text-xl font-bold mb-4 text-white">Tarea</h3>
       <form onSubmit={handleSubmit}>
         <input
@@ -59,16 +59,16 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
         />
         {photoPreview && (
           <Image
-          width={200}
-          height={200}
+            width={200}
+            height={200}
             src={photoPreview}
             alt="Vista previa"
-            className="w-full mb-2 rounded-lg"
+            className=" mb-2 rounded-lg h-24 w-auto"
           />
         )}
         <button
           type="submit"
-          className="bg-blue-600/20 text-white py-2 px-4 rounded-lg hover:bg-blue-700/30"
+          className="text-blue-400/90 text-sm hover:text-blue-400 bg-blue-500/30 hover:bg-blue-500/40 p-2 rounded-sm"
         >
           Añadir
         </button>

@@ -7,6 +7,7 @@ interface TaskColumnProps {
   tasks: Task[];
   onTaskDrop: (taskId: string) => void;
   onDeleteTask: (taskId: string) => void;
+  onEditTask: (task: Task) => void;
 }
 
 export const TaskColumn: React.FC<TaskColumnProps> = ({
@@ -14,6 +15,7 @@ export const TaskColumn: React.FC<TaskColumnProps> = ({
   tasks,
   onTaskDrop,
   onDeleteTask,
+  onEditTask,
 }) => {
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -40,7 +42,12 @@ export const TaskColumn: React.FC<TaskColumnProps> = ({
           <p className="text-gray-500">No hay tareas de momento...</p>
         ) : (
           tasks.map((task) => (
-            <TaskCard key={task.id} task={task} onDelete={onDeleteTask} />
+            <TaskCard
+              key={task.id}
+              task={task}
+              onDelete={onDeleteTask}
+              onEdit={onEditTask} // Pasamos la función onEditTask
+            />
           ))
         )}
       </div>
