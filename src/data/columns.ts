@@ -1,1 +1,1 @@
-export const columns = ["Pendiente", "En progreso", "Completado"];
+export const columns = ["Pendiente", "En progreso", "Finalizado"];

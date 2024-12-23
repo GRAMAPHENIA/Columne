@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
+import UploadPhotoIcon from "./UploadPhotoIcon";
+
 interface AddTaskFormProps {
   onAddTask: (title: string, description: string, photoUrl?: string) => void;
 }
@@ -51,27 +53,42 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
           required
           className="w-full mb-2 p-2 border border-gray-500/20 rounded-lg bg-gray-900/80 text-white"
         />
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handlePhotoChange}
-          className="w-full mb-2 p-2 border border-gray-500/20 rounded-lg bg-gray-900/80 text-white"
-        />
+
+        {/* Botón para subir foto al final */}
+        <div className="flex items-center justify-start space-x-4 my-4">
+          <label
+            htmlFor="photo-upload"
+            className="flex items-center justify-center cursor-pointer rounded-sm text-blue-400/90 text-md hover:text-blue-400 bg-blue-500/30 hover:bg-blue-500/40 p-1 shadow transition-all duration-200"
+          >
+            <UploadPhotoIcon />
+            {/* <span className="px-2">Subir foto</span> */}
+          </label>
+          <input
+            id="photo-upload"
+            type="file"
+            accept="image/*"
+            onChange={handlePhotoChange}
+            className="hidden"
+          />
+        </div>
+        {/* Vista previa de la imagen */}
         {photoPreview && (
           <Image
             width={200}
             height={200}
             src={photoPreview}
             alt="Vista previa"
-            className=" mb-2 rounded-lg h-24 w-auto"
+            className="rounded-sm h-20 w-auto my-4 opacity-70"
           />
         )}
-        <button
-          type="submit"
-          className="text-blue-400/90 text-sm hover:text-blue-400 bg-blue-500/30 hover:bg-blue-500/40 p-2 rounded-sm"
-        >
-          Añadir
-        </button>
+        <div className="flex justify-end">
+          <button
+            type="submit"
+            className="text-gray-400/90 text-sm hover:text-emerald-100/40 bg-gray-800/30 hover:bg-gray-800/40 p-2 rounded-sm mt-4 shadow transition-all duration-200 border border-gray-500/20"
+          >
+            Añadir tarea
+          </button>
+        </div>
       </form>
     </div>
   );
