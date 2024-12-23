@@ -4,9 +4,9 @@ import { TaskCard } from "./TaskCard";
 
 // Mapea las columnas a colores con opacidad de fondo y colores de texto
 const columnColors: { [key: string]: { bg: string; text: string } } = {
-  Pendiente: { bg: "bg-blue-400/5", text: "text-blue-400" }, // Fondo y color de texto para 'Pendiente'
-  "En progreso": { bg: "bg-amber-200/5", text: "text-amber-300" }, // Fondo y color de texto para 'En progreso'
-  Finalizado: { bg: "bg-emerald-200/5", text: "text-emerald-300" }, // Fondo y color de texto para 'Finalizado'
+  "Pendiente": { bg: "bg-blue-400/5", text: "text-blue-400" }, 
+  "En progreso": { bg: "bg-amber-200/5", text: "text-amber-300" }, 
+  "Finalizado": { bg: "bg-emerald-200/5", text: "text-emerald-300" }, 
 };
 
 interface TaskColumnProps {
