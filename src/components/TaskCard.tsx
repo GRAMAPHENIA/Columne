@@ -62,13 +62,13 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       <p className="text-sm text-gray-300">{task.description}</p>
       <div className="flex justify-end mt-4 space-x-4">
         <button
-          className="text-blue-400/90 text-sm hover:text-blue-400 bg-blue-500/30 hover:bg-blue-500/40 p-2 rounded-sm"
+          className="text-blue-400/90 text-sm hover:text-blue-400 bg-blue-500/30 hover:bg-blue-400/30 p-2 rounded-sm"
           onClick={() => onEdit(task)}
         >
           <Pencil />
         </button>
         <button
-          className="text-red-400/90 text-sm hover:text-red-400 bg-red-500/30 hover:bg-red-500/40 p-2 rounded-sm"
+          className="text-red-400/90 text-sm hover:text-red-400 bg-red-500/30 hover:bg-red-500/50 p-2 rounded-sm"
           onClick={() => handleDelete(task.id)}
         >
           <TrashIcon />
