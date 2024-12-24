@@ -4,7 +4,12 @@ import Image from "next/image";
 import UploadPhotoIcon from "./UploadPhotoIcon";
 
 interface AddTaskFormProps {
-  onAddTask: (title: string, description: string, photoUrl?: string) => void;
+  onAddTask: (
+    title: string,
+    description: string,
+    photoUrl?: string,
+    tags?: string[]
+  ) => void;
 }
 
 export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
@@ -12,15 +17,19 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
   const [description, setDescription] = useState("");
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [tags, setTags] = useState<string[]>([]);
+  const [tagInput, setTagInput] = useState("");
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const photoUrl = photo ? URL.createObjectURL(photo) : undefined;
-    onAddTask(title, description, photoUrl);
+    onAddTask(title, description, photoUrl, tags);
     setTitle("");
     setDescription("");
     setPhoto(null);
     setPhotoPreview(null);
+    setTags([]);
+    setTagInput("");
   };
 
   const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,6 +40,17 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
     } else {
       setPhotoPreview(null);
     }
+  };
+
+  const handleAddTag = () => {
+    if (tagInput.trim() && !tags.includes(tagInput.trim())) {
+      setTags((prevTags) => [...prevTags, tagInput.trim()]);
+      setTagInput("");
+    }
+  };
+
+  const handleRemoveTag = (tag: string) => {
+    setTags((prevTags) => prevTags.filter((t) => t !== tag));
   };
 
   return (
@@ -54,14 +74,50 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
           className="w-full mb-2 p-2 border border-gray-500/20 rounded-lg bg-gray-900/80 text-white"
         />
 
-        {/* Botón para subir foto al final */}
+        {/* Manejo de etiquetas */}
+        <div className="mb-4">
+          <div className="flex items-center space-x-2">
+            <input
+              type="text"
+              value={tagInput}
+              onChange={(e) => setTagInput(e.target.value)}
+              placeholder="Agregar etiqueta"
+              className="flex-1 p-2 border border-gray-500/20 rounded-lg bg-gray-900/80 text-white"
+            />
+            <button
+              type="button"
+              onClick={handleAddTag}
+              className="text-sm text-blue-400 bg-blue-500/30 hover:bg-blue-500/40 p-2 rounded-sm shadow transition-all"
+            >
+              Añadir
+            </button>
+          </div>
+          <div className="flex flex-wrap mt-2 space-x-2">
+            {tags.map((tag, index) => (
+              <span
+                key={index}
+                className="flex items-center bg-gray-800/80 text-white px-2 py-1 rounded-full text-sm"
+              >
+                {tag}
+                <button
+                  type="button"
+                  onClick={() => handleRemoveTag(tag)}
+                  className="ml-2 text-red-400 hover:text-red-500"
+                >
+                  ✕
+                </button>
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Botón para subir foto */}
         <div className="flex items-center justify-start space-x-4 my-4">
           <label
             htmlFor="photo-upload"
             className="flex items-center justify-center cursor-pointer rounded-sm text-blue-400/90 text-md hover:text-blue-400 bg-blue-500/30 hover:bg-blue-500/40 p-1 shadow transition-all duration-200"
           >
             <UploadPhotoIcon />
-            {/* <span className="px-2">Subir foto</span> */}
           </label>
           <input
             id="photo-upload"

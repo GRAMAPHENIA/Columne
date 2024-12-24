@@ -60,6 +60,21 @@ export const TaskCard: React.FC<TaskCardProps> = ({
       )}
       <h3 className="font-semibold text-white">{task.title}</h3>
       <p className="text-sm text-gray-300">{task.description}</p>
+
+      {/* Mostrar etiquetas */}
+      {task.tags && task.tags.length > 0 && (
+        <div className="flex flex-wrap gap-2 mt-3">
+          {task.tags.map((tag, index) => (
+            <span
+              key={index}
+              className="text-xs text-gray-200 bg-gray-700 px-2 py-1 rounded-full"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+
       <div className="flex justify-end mt-4 space-x-4">
         <button
           className="text-blue-400/90 text-sm hover:text-blue-400 bg-blue-500/30 hover:bg-blue-400/30 p-2 rounded-sm"

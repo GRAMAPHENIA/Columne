@@ -28,13 +28,19 @@ export const useTaskManager = () => {
    * @param description - Descripción de la tarea.
    * @param photoUrl - (Opcional) URL de la imagen asociada a la tarea.
    */
-  const addTask = (title: string, description: string, photoUrl?: string) => {
+  const addTask = (
+    title: string,
+    description: string,
+    photoUrl?: string,
+    tags?: string[]
+  ) => {
     const newTask: Task = {
-      id: Date.now().toString(), // ID único basado en la marca de tiempo.
+      id: Date.now().toString(),
       title,
       description,
-      columnId: "Pendiente", // Se agrega a la columna "Pendiente" por defecto.
+      columnId: "Pendiente",
       photoUrl,
+      tags: tags || [], // Inicializa tags como un arreglo vacío si no se proporcionan
     };
     setTasks([...tasks, newTask]);
   };
@@ -66,7 +72,9 @@ export const useTaskManager = () => {
    */
   const updateTask = (updatedTask: Task) => {
     setTasks((prevTasks) =>
-      prevTasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+      prevTasks.map((task) =>
+        task.id === updatedTask.id ? { ...task, ...updatedTask } : task
+      )
     );
   };
 
