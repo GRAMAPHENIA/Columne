@@ -4,7 +4,7 @@ const TrashIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 68 68"
-    className="w-4 h-4 text-red-400/90" // Aquí aplicamos el color de Tailwind
+    className="w-4 h-4 text-rose-400" // Aquí aplicamos el color de Tailwind
   >
     <g>
       <path

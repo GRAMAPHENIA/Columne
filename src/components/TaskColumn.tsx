@@ -42,7 +42,7 @@ export const TaskColumn: React.FC<TaskColumnProps> = ({
 
   return (
     <div
-      className={`${bg} p-4 rounded-lg flex-1 min-w-[200px] space-y-4 border border-gray-700/50`}
+      className={`${bg} p-4 rounded-lg flex-1 min-w-[300px] space-y-4 border border-gray-700/50`}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
       aria-labelledby={`${column}-column`}
