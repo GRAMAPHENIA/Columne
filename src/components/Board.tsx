@@ -35,7 +35,7 @@ const Board: React.FC = () => {
         <AddTaskForm onAddTask={addTask} />
       </div>
       {/* Tablero Kanban */}
-      <div className="kanban-board flex space-x-4 w-full">
+      <div className="kanban-board flex space-x-4 w-full max-w-6xl">
         {columns.map((column) => (
           <TaskColumn
             key={column}
