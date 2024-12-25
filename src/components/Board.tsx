@@ -8,7 +8,6 @@ import { columns } from "@/data/columns";
 // import Gamification from "@/components/gamification/Gamification";
 import { EditTaskModal } from "./tasks/EditTaskModal";
 import { Task } from "../types/task";
-import Gamification from "./gamification/Gamification";
 
 const Board: React.FC = () => {
   const { tasks, addTask, deleteTask, moveTask, updateTask } = useTaskManager();
@@ -30,15 +29,13 @@ const Board: React.FC = () => {
   };
 
   return (
-    <div className="kanban-container flex flex-col space-y-4 p-4">
+    <div className="kanban-container flex flex-col p-4">
       <div className="flex flex-row space-x-4">
         {/* Formulario para añadir tareas */}
         <AddTaskForm onAddTask={addTask} />
-        <Gamification />
       </div>
       {/* Tablero Kanban */}
       <div className="kanban-board flex space-x-4 w-full">
-        {/* <Gamification /> */}
         {columns.map((column) => (
           <TaskColumn
             key={column}

@@ -54,7 +54,7 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-gray-900 rounded-lg shadow-lg max-w-6xl mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-gray-900 rounded-lg shadow-lg max-w-6xl mx-auto mb-4">
       <div className="col-span-1">
         <h3 className="text-xl font-bold mb-6 text-white">
           Añadir Nueva Tarea

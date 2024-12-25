@@ -34,10 +34,7 @@ export const TaskColumn: React.FC<TaskColumnProps> = ({
     event.preventDefault();
     const taskId = event.dataTransfer.getData("text");
     onTaskDrop(taskId);
-
-    // Feedback visual (animación de fondo)
-    event.currentTarget.classList.add("drop-highlight");
-    setTimeout(() => event.currentTarget.classList.remove("drop-highlight"), 500);
+    
   };
 
 
