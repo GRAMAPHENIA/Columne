@@ -1,30 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useTaskManager } from "../hooks/useTaskManager";
 import { AddTaskForm } from "./tasks/AddTaskForm";
 import { TaskColumn } from "./tasks/TaskColumn";
 import { columns } from "@/data/columns";
+import { useTaskModal } from "@/hooks/useTaskModal";
 import { EditTaskModal } from "./tasks/EditTaskModal";
-import { Task } from "../types/task";
+import { Task } from "@/types/task";
 
 const Board: React.FC = () => {
   const { tasks, addTask, deleteTask, moveTask, updateTask } = useTaskManager();
+  const { isModalOpen, taskToEdit, openModal, closeModal } = useTaskModal();
 
-  // Estado para manejar el modal
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [taskToEdit, setTaskToEdit] = useState<Task | null>(null);
-
-  // Función para abrir el modal de edición
-  const handleEditTask = (task: Task) => {
-    setTaskToEdit(task);
-    setIsModalOpen(true);
-  };
-
-  // Función para guardar los cambios en la tarea
   const handleSaveTask = (updatedTask: Task) => {
     updateTask(updatedTask); // Usamos el hook para actualizar la tarea
-    setIsModalOpen(false); // Cerramos el modal
+    closeModal(); // Cerramos el modal
   };
 
   return (
@@ -42,7 +33,7 @@ const Board: React.FC = () => {
             tasks={tasks.filter((task) => task.columnId === column)}
             onTaskDrop={(taskId) => moveTask(taskId, column)}
             onDeleteTask={deleteTask}
-            onEditTask={handleEditTask} // Pasamos la función para editar
+            onEditTask={openModal} // Pasamos la función para editar
           />
         ))}
       </div>
@@ -51,7 +42,7 @@ const Board: React.FC = () => {
       <EditTaskModal
         task={taskToEdit}
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={closeModal}
         onSave={handleSaveTask}
       />
     </div>
