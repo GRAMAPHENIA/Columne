@@ -1,4 +1,4 @@
-import KanbanBoard from "@/components/kanbanBoard";
+import KanbanBoard from "@/components/Board";
 import Image from "next/image";
 
 export default function Home() {

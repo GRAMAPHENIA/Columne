@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 import { useTaskManager } from "../hooks/useTaskManager";
-import { AddTaskForm } from "./AddTaskForm";
-import { TaskColumn } from "./TaskColumn";
+import { AddTaskForm } from "./tasks/AddTaskForm";
+import { TaskColumn } from "./tasks/TaskColumn";
 import { columns } from "@/data/columns";
-import { EditTaskModal } from "./EditTaskModal"; // Importamos el modal
+import { EditTaskModal } from "./tasks/EditTaskModal"; 
 import { Task } from "../types/task";
 
 const KanbanBoard: React.FC = () => {
