@@ -5,7 +5,6 @@ import { useTaskManager } from "../hooks/useTaskManager";
 import { AddTaskForm } from "./tasks/AddTaskForm";
 import { TaskColumn } from "./tasks/TaskColumn";
 import { columns } from "@/data/columns";
-// import Gamification from "@/components/gamification/Gamification";
 import { EditTaskModal } from "./tasks/EditTaskModal";
 import { Task } from "../types/task";
 

@@ -167,6 +167,7 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
         <p className="text-gray-400">
           Espacio disponible para futuras funcionalidades.
         </p>
+        
       </div>
     </div>
   );
