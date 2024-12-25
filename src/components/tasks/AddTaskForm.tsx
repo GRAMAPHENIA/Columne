@@ -55,7 +55,6 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-gray-900 rounded-lg shadow-lg max-w-6xl mx-auto">
-      {/* Formulario: lado izquierdo */}
       <div className="col-span-1">
         <h3 className="text-xl font-bold mb-6 text-white">
           Añadir Nueva Tarea
@@ -88,7 +87,7 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
                 value={tagInput}
                 onChange={(e) => setTagInput(e.target.value)}
                 placeholder="Agregar etiqueta"
-                className="flex-1 p-2 border border-gray-700 rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                className="flex-1 p-2 border border-gray-700 rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-teal-500 focus:outline-none w-1/2"
                 aria-label="Agregar etiqueta"
               />
               <button
@@ -126,7 +125,7 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
           <div className="w-full">
             <label
               htmlFor="photo-upload"
-              className="block w-full text-center cursor-pointer text-teal-500 bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg shadow-md focus:ring-2 focus:ring-teal-400 focus:outline-none"
+              className="block w-full text-center cursor-pointer text-teal-500 bg-gray-800 hover:bg-gray-700 px-4 py-3 rounded-lg shadow-md focus:ring-2 focus:ring-teal-400 focus:outline-none"
               aria-label="Subir foto"
             >
               <div className="flex flex-col justify-center items-center">

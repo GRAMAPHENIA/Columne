@@ -10,7 +10,7 @@ import { EditTaskModal } from "./tasks/EditTaskModal";
 import { Task } from "../types/task";
 import Gamification from "./gamification/Gamification";
 
-const KanbanBoard: React.FC = () => {
+const Board: React.FC = () => {
   const { tasks, addTask, deleteTask, moveTask, updateTask } = useTaskManager();
 
   // Estado para manejar el modal
@@ -33,8 +33,8 @@ const KanbanBoard: React.FC = () => {
     <div className="kanban-container flex flex-col space-y-4 p-4">
       <div className="flex flex-row space-x-4">
         {/* Formulario para añadir tareas */}
-        <Gamification />
         <AddTaskForm onAddTask={addTask} />
+        <Gamification />
       </div>
       {/* Tablero Kanban */}
       <div className="kanban-board flex space-x-4 w-full">
@@ -62,4 +62,4 @@ const KanbanBoard: React.FC = () => {
   );
 };
 
-export default KanbanBoard;
+export default Board;
