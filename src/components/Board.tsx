@@ -5,8 +5,10 @@ import { useTaskManager } from "../hooks/useTaskManager";
 import { AddTaskForm } from "./tasks/AddTaskForm";
 import { TaskColumn } from "./tasks/TaskColumn";
 import { columns } from "@/data/columns";
-import { EditTaskModal } from "./tasks/EditTaskModal"; 
+// import Gamification from "@/components/gamification/Gamification";
+import { EditTaskModal } from "./tasks/EditTaskModal";
 import { Task } from "../types/task";
+import Gamification from "./gamification/Gamification";
 
 const KanbanBoard: React.FC = () => {
   const { tasks, addTask, deleteTask, moveTask, updateTask } = useTaskManager();
@@ -29,11 +31,14 @@ const KanbanBoard: React.FC = () => {
 
   return (
     <div className="kanban-container flex flex-col space-y-4 p-4">
-      {/* Formulario para añadir tareas */}
-      <AddTaskForm onAddTask={addTask} />
-
+      <div className="flex flex-row space-x-4">
+        {/* Formulario para añadir tareas */}
+        <Gamification />
+        <AddTaskForm onAddTask={addTask} />
+      </div>
       {/* Tablero Kanban */}
       <div className="kanban-board flex space-x-4 w-full">
+        {/* <Gamification /> */}
         {columns.map((column) => (
           <TaskColumn
             key={column}

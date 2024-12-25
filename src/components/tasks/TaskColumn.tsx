@@ -1,12 +1,12 @@
 import React from "react";
-import { Task } from "../types/task";
+import { Task } from "@/types/task";
 import { TaskCard } from "./TaskCard";
 
-// Mapea las columnas a colores con opacidad de fondo y colores de texto
+// Colores para cada columna
 const columnColors: { [key: string]: { bg: string; text: string } } = {
-  "Pendiente": { bg: "bg-blue-400/10", text: "text-blue-400" }, 
-  "En progreso": { bg: "bg-amber-200/10", text: "text-amber-300" }, 
-  "Finalizado": { bg: "bg-emerald-200/10", text: "text-emerald-300" }, 
+  "Pendiente": { bg: "bg-blue-400/10", text: "text-blue-400" },
+  "En progreso": { bg: "bg-amber-200/10", text: "text-amber-300" },
+  "Finalizado": { bg: "bg-emerald-200/10", text: "text-emerald-300" },
 };
 
 interface TaskColumnProps {
@@ -24,21 +24,28 @@ export const TaskColumn: React.FC<TaskColumnProps> = ({
   onDeleteTask,
   onEditTask,
 }) => {
+  // Manejar arrastre sobre la columna
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
   };
 
+  // Manejar el soltar de una tarea en la columna
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const taskId = event.dataTransfer.getData("text");
     onTaskDrop(taskId);
+
+    // Feedback visual (animación de fondo)
+    event.currentTarget.classList.add("drop-highlight");
+    setTimeout(() => event.currentTarget.classList.remove("drop-highlight"), 500);
   };
 
-  // Obtener el color de fondo y texto según la columna
+
+  // Colores de fondo y texto según la columna
   const { bg, text } = columnColors[column] || {
     bg: "bg-gray-900",
     text: "text-white",
-  }; // Valores por defecto
+  };
 
   return (
     <div
@@ -59,7 +66,7 @@ export const TaskColumn: React.FC<TaskColumnProps> = ({
               key={task.id}
               task={task}
               onDelete={onDeleteTask}
-              onEdit={onEditTask} // Pasamos la función onEditTask
+              onEdit={onEditTask}
             />
           ))
         )}
