@@ -2,12 +2,12 @@
 
 import React from "react";
 import { useTaskManager } from "../hooks/useTaskManager";
-import { AddTaskForm } from "./tasks/AddTaskForm";
 import { TaskColumn } from "./tasks/TaskColumn";
 import { columns } from "@/data/columns";
 import { useTaskModal } from "@/hooks/useTaskModal";
 import { EditTaskModal } from "./tasks/EditTaskModal";
 import { Task } from "@/types/task";
+import { AddTaskForm } from "./AddTaskForm/AddTaskForm";
 
 const Board: React.FC = () => {
   const { tasks, addTask, deleteTask, moveTask, updateTask } = useTaskManager();
