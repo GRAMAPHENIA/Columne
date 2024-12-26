@@ -1,0 +1,62 @@
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px; /* Reducir el espacio entre los recuadros */
+  background-color: #1a202c; /* Fondo oscuro */
+  padding: 10px; /* Reducir el padding */
+  border-radius: 8px;
+}
+
+.day {
+  border: 1px solid #2d3748; /* Borde oscuro */
+  padding: 5px; /* Reducir el padding */
+  text-align: center;
+  position: relative;
+  background-color: #38B2AC; /* Fondo teal similar a bg-teal-500 */
+  color: #e2e8f0; /* Texto claro */
+  border-radius: 4px;
+  height: 30px; /* Altura fija más pequeña */
+  width: 30px; /* Ancho fijo más pequeño */
+  cursor: pointer; /* Cambiar el cursor al pasar el mouse */
+  transition: background-color 1s, color 1s; /* Transición suave */
+}
+
+.day:hover {
+  background-color: #319795; /* Fondo más oscuro al pasar el mouse */
+  color: #edf2f7; /* Texto más claro */
+}
+
+.day:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip {
+  visibility: hidden;
+  opacity: 0;
+  background-color: #2d3748; /* Fondo oscuro */
+  color: #e2e8f0; /* Texto claro */
+  text-align: left;
+  border-radius: 4px;
+  padding: 12px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%; /* Posicionar el tooltip arriba del recuadro */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px; /* Ancho fijo para el tooltip */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para el tooltip */
+  transition: opacity 0.3s;
+  border: 1px solid #404d64; /* Borde oscuro */
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%; /* Flecha apuntando hacia abajo */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #2d3748 transparent transparent transparent; /* Flecha del tooltip */
+}

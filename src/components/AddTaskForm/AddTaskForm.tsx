@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { PhotoUpload } from "./PhotoUpload";
 import { TagInput } from "./TagInput";
 import Image from "next/image";
+import Calendar from "../calendar/Calendar";
+import { Task } from "@/types/task";
 
 interface AddTaskFormProps {
   onAddTask: (
@@ -18,10 +20,21 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
   const [photo, setPhoto] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [tags, setTags] = useState<string[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const photoUrl = photo ? URL.createObjectURL(photo) : undefined;
+    const newTask: Task = {
+      id: Date.now().toString(),
+      title,
+      description,
+      date: new Date().toISOString(),
+      photoUrl,
+      tags,
+      columnId: "",
+    };
+    setTasks([...tasks, newTask]);
     onAddTask(title, description, photoUrl, tags);
     setTitle("");
     setDescription("");
@@ -102,9 +115,10 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
 
       {/* Contenido vacío (las otras dos columnas) */}
       <div className="col-span-2 flex justify-center items-center">
-        <p className="text-gray-400">
-          Espacio disponible para futuras funcionalidades.
-        </p>
+        <div>
+          <p className="text-gray-400 mb-4">Vista previa del calendario:</p>
+          <Calendar tasks={tasks} />
+        </div>
       </div>
     </div>
   );
