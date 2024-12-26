@@ -1,24 +1,24 @@
 .calendar {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px; /* Reducir el espacio entre los recuadros */
+  gap: 3px; /* Reducir aún más el espacio entre los recuadros */
   background-color: #1a202c; /* Fondo oscuro */
-  padding: 10px; /* Reducir el padding */
+  padding: 10px; /* Reducir aún más el padding */
   border-radius: 8px;
 }
 
 .day {
   border: 1px solid #2d3748; /* Borde oscuro */
-  padding: 5px; /* Reducir el padding */
+  padding: 2px; /* Reducir aún más el padding */
   text-align: center;
   position: relative;
   background-color: #38B2AC; /* Fondo teal similar a bg-teal-500 */
   color: #e2e8f0; /* Texto claro */
-  border-radius: 4px;
-  height: 30px; /* Altura fija más pequeña */
-  width: 30px; /* Ancho fijo más pequeño */
+  border-radius: 3px;
+  height: 30px; /* Ajustar la altura */
+  width: 30px; /* Ajustar el ancho */
   cursor: pointer; /* Cambiar el cursor al pasar el mouse */
-  transition: background-color 1s, color 1s; /* Transición suave */
+  transition: background-color 0.3s, color 0.3s; /* Transición más rápida */
 }
 
 .day:hover {

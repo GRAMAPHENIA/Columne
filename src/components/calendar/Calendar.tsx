@@ -9,7 +9,7 @@ interface CalendarProps {
 const Calendar: React.FC<CalendarProps> = ({ tasks }) => {
   const renderCalendar = () => {
     const calendar = [];
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 30; i++) {
       const dayTasks = tasks.filter(
         (task) => new Date(task.date).getDate() === i + 1
       );
@@ -23,18 +23,17 @@ const Calendar: React.FC<CalendarProps> = ({ tasks }) => {
       const year = date.getFullYear();
       const month = date.getMonth() + 1;
       const day = i + 1;
-      const contributionsText = `${taskCount} contribuciones en ${new Intl.DateTimeFormat('es-ES', {
-        month: "long",
-      }).format(new Date(year, month - 1, day))} ${day}`;
+      const contributionsText = `${taskCount} contribuciones en ${new Intl.DateTimeFormat(
+        "es-ES",
+        {
+          month: "long",
+        }
+      ).format(new Date(year, month - 1, day))} ${day}`;
 
       const tooltipContent = contributionsText;
 
       calendar.push(
-        <div
-          key={i}
-          className={styles.day}
-          style={{ backgroundColor: color }}
-        >
+        <div key={i} className={styles.day} style={{ backgroundColor: color }}>
           {taskCount > 0 && (
             <div className={styles.tooltip}>{tooltipContent}</div>
           )}
