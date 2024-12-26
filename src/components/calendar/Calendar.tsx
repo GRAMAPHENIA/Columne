@@ -16,18 +16,25 @@ const Calendar: React.FC<CalendarProps> = ({ tasks }) => {
       const taskCount = dayTasks.length;
       const color =
         taskCount > 0
-          ? `rgba(56, 178, 172, ${Math.min(taskCount / 10, 1)})
-`
+          ? `rgba(56, 178, 172, ${Math.min(taskCount / 10, 1)})`
           : "transparent"; // Color azul pastel basado en la cantidad de tareas
 
-      const tooltipContent = dayTasks
-        .map(
-          (task) => `${task.title} ${new Date(task.date).toLocaleDateString()}`
-        )
-        .join("\n");
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = i + 1;
+      const contributionsText = `${taskCount} contribuciones en ${new Intl.DateTimeFormat('es-ES', {
+        month: "long",
+      }).format(new Date(year, month - 1, day))} ${day}`;
+
+      const tooltipContent = contributionsText;
 
       calendar.push(
-        <div key={i} className={styles.day} style={{ backgroundColor: color }}>
+        <div
+          key={i}
+          className={styles.day}
+          style={{ backgroundColor: color }}
+        >
           {taskCount > 0 && (
             <div className={styles.tooltip}>{tooltipContent}</div>
           )}

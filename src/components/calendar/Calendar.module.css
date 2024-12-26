@@ -44,7 +44,7 @@
   bottom: 100%; /* Posicionar el tooltip arriba del recuadro */
   left: 50%;
   transform: translateX(-50%);
-  width: 150px; /* Ancho fijo para el tooltip */
+  width: max-content; /* Ancho fijo para el tooltip */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para el tooltip */
   transition: opacity 0.3s;
   border: 1px solid #404d64; /* Borde oscuro */
