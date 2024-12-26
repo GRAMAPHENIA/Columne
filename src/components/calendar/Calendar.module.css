@@ -5,7 +5,7 @@
   background-color: #313f503b; /* Fondo oscuro */
   padding: 15px; /* Reducir aún más el padding */
   border-radius: 8px;
- 
+ border: 1px solid #2d3748; /* Borde oscuro */
 }
 
 .day {
