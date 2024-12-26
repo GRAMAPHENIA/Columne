@@ -114,9 +114,9 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
       </div>
 
       {/* Contenido vacío (las otras dos columnas) */}
-      <div className="col-span-2 flex justify-center items-center">
+      <div className="col-span-2 flex justify-right items-start">
         <div>
-          <p className="text-gray-400 mb-4">Vista previa del calendario:</p>
+          <p className="text-xl font-bold mb-6 text-white">Contribuciones Mensuales</p>
           <Calendar tasks={tasks} />
         </div>
       </div>

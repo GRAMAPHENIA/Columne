@@ -2,9 +2,10 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 3px; /* Reducir aún más el espacio entre los recuadros */
-  background-color: #1a202c; /* Fondo oscuro */
-  padding: 10px; /* Reducir aún más el padding */
+  background-color: #313f503b; /* Fondo oscuro */
+  padding: 15px; /* Reducir aún más el padding */
   border-radius: 8px;
+ 
 }
 
 .day {
