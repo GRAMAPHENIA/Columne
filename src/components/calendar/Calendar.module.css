@@ -20,16 +20,16 @@
   flex: 1; /* Se asegura que ocupe el espacio disponible */
   text-align: center; /* Centra el texto */
   font-size: 1rem; /* Texto más pequeño */
-  font-weight: bold;
+  font-weight: normal;
   margin: 0;
   overflow: hidden; /* Evita desbordamientos */
   white-space: nowrap; /* No permite saltos de línea */
   text-overflow: ellipsis; /* Muestra "..." si el texto es muy largo */
-  width: 200px; /* Fija el ancho máximo del título */
+  width: 300px; /* Fija el ancho máximo del título */
 }
 
 .header button {
-  background-color: #14B8A6;
+  background-color: #14b8a6;
   color: white;
   border: none;
   padding-inline: 10px;
@@ -39,7 +39,7 @@
 }
 
 .header button:hover {
-  background-color: #0D9488;
+  background-color: #0d9488;
 }
 
 .calendar {
