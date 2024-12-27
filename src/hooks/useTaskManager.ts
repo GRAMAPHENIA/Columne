@@ -40,7 +40,8 @@ export const useTaskManager = () => {
       description,
       columnId: "Pendiente",
       photoUrl,
-      tags: tags || [], // Inicializa tags como un arreglo vacío si no se proporcionan
+      tags: tags || [],
+      date: ""
     };
     setTasks([...tasks, newTask]);
   };
