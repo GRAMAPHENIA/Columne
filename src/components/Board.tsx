@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTaskManager } from "../hooks/useTaskManager";
-import { TaskColumn } from "./tasks/TaskColumn";
+import { TaskColumn } from "./tasks/task-column/TaskColumn";
 import { columns } from "@/data/columns";
 import { useTaskModal } from "@/hooks/useTaskModal";
 import { EditTaskModal } from "./tasks/EditTaskModal";

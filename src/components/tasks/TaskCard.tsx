@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Task } from "../types/task";
+import { Task } from "@/types/task";
 import TrashIcon from "@/components/icons/Trash";
 import Pencil from "@/components/icons/Pencil";
 import Image from "next/image";
