@@ -1,30 +1,73 @@
+.calendarContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-width: 100%;
+  background: #1c2431;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  flex: 1; /* Se asegura que ocupe el espacio disponible */
+  text-align: center; /* Centra el texto */
+  font-size: 1rem; /* Texto más pequeño */
+  font-weight: bold;
+  margin: 0;
+  overflow: hidden; /* Evita desbordamientos */
+  white-space: nowrap; /* No permite saltos de línea */
+  text-overflow: ellipsis; /* Muestra "..." si el texto es muy largo */
+  width: 200px; /* Fija el ancho máximo del título */
+}
+
+.header button {
+  background-color: #14B8A6;
+  color: white;
+  border: none;
+  padding-inline: 10px;
+  padding-block: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.header button:hover {
+  background-color: #0D9488;
+}
+
 .calendar {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 3px; /* Reducir aún más el espacio entre los recuadros */
-  background-color: #313f503b; /* Fondo oscuro */
-  padding: 15px; /* Reducir aún más el padding */
-  border-radius: 8px;
- border: 1px solid #2d3748; /* Borde oscuro */
+  grid-template-columns: repeat(7, 1fr); /* 7 columnas */
+  grid-template-rows: repeat(5, 1fr); /* 6 filas fijas */
+  gap: 4; /* Sin espacios */
+  flex: 1;
+  width: 100%;
+  height: calc(100% - 60px); /* Espacio dinámico para las celdas */
 }
 
 .day {
-  border: 1px solid #2d3748; /* Borde oscuro */
-  padding: 2px; /* Reducir aún más el padding */
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #2d3744;
   position: relative;
-  background-color: #38B2AC; /* Fondo teal similar a bg-teal-500 */
-  color: #e2e8f0; /* Texto claro */
-  border-radius: 3px;
-  height: 30px; /* Ajustar la altura */
-  width: 30px; /* Ajustar el ancho */
-  cursor: pointer; /* Cambiar el cursor al pasar el mouse */
-  transition: background-color 0.3s, color 0.3s; /* Transición más rápida */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 4px;
+  aspect-ratio: 1; /* Relación de aspecto 1:1 */
 }
 
 .day:hover {
-  background-color: #319795; /* Fondo más oscuro al pasar el mouse */
-  color: #edf2f7; /* Texto más claro */
+  background-color: #319795;
+  color: #edf2f7;
 }
 
 .day:hover .tooltip {
@@ -35,29 +78,34 @@
 .tooltip {
   visibility: hidden;
   opacity: 0;
-  background-color: #2d3748; /* Fondo oscuro */
-  color: #e2e8f0; /* Texto claro */
+  background-color: #2d3748;
+  color: #e2e8f0;
   text-align: left;
   border-radius: 4px;
   padding: 12px;
   position: absolute;
   z-index: 1;
-  bottom: 100%; /* Posicionar el tooltip arriba del recuadro */
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  width: max-content; /* Ancho fijo para el tooltip */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para el tooltip */
+  width: max-content;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: opacity 0.3s;
-  border: 1px solid #404d64; /* Borde oscuro */
+  border: 1px solid #404d64;
 }
 
 .tooltip::after {
-  content: '';
+  content: "";
   position: absolute;
-  top: 100%; /* Flecha apuntando hacia abajo */
+  top: 100%;
   left: 50%;
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #2d3748 transparent transparent transparent; /* Flecha del tooltip */
+  border-color: #2d3748 transparent transparent transparent;
+}
+
+.today {
+  font-weight: bold;
+  background-color: #ffeb3b;
 }

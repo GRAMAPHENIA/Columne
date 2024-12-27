@@ -44,7 +44,7 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 bg-gray-900 rounded-lg shadow-lg max-w-6xl mx-auto mb-4">
+    <div className="grid grid-cols-2 md:grid-cols-2 gap-6 p-6 bg-gray-900 rounded-lg shadow-lg max-w-6xl mx-auto mb-4">
       <div className="col-span-1">
         <h3 className="text-xl font-bold mb-6 text-white">
           Añadir Nueva Tarea
@@ -114,7 +114,7 @@ export const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
       </div>
 
       {/* Contenido vacío (las otras dos columnas) */}
-      <div className="col-span-2 flex justify-right items-start">
+      <div className="col-span-1 flex justify-center items-center">
         <div>
           <p className="text-xl font-bold mb-6 text-white">Contribuciones Mensuales</p>
           <Calendar tasks={tasks} />
