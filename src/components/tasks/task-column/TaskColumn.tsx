@@ -1,70 +1,59 @@
-import React, { useCallback } from "react";
-import { Task } from "@/types/task";
-import { TaskCard } from "../TaskCard";
-import "./TaskColumn.css";
+import React, { forwardRef } from 'react'
+import { useDrop } from 'react-dnd'
+import { TaskCard } from '@/components/tasks/TaskCard'
+import { Task, ColumnType } from '@/types/task'
 
 interface TaskColumnProps {
-  column: string;
-  tasks: Task[];
-  onTaskDrop: (taskId: string) => void;
-  onDeleteTask: (taskId: string) => void;
-  onEditTask: (task: Task) => void;
+  column: ColumnType
+  tasks: Task[]
+  onMoveTask: (taskId: string, targetColumn: ColumnType) => void
+  onDeleteTask: (taskId: string) => void
+  onEditTask: (task: Task) => void
 }
 
-export const TaskColumn: React.FC<TaskColumnProps> = ({
-  column,
-  tasks,
-  onTaskDrop,
-  onDeleteTask,
-  onEditTask,
-}) => {
-  // Manejar arrastre sobre la columna
-  const handleDragOver = useCallback((event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-  }, []);
+const TaskColumn = forwardRef<HTMLDivElement, TaskColumnProps>(
+  ({ column, tasks, onMoveTask, onDeleteTask, onEditTask }, ref) => {
+    const [, drop] = useDrop({
+      accept: 'TASK',
+      drop: (item: { id: string }) => {
+        onMoveTask(item.id, column)
+      },
+    })
 
-  // Manejar el soltar de una tarea en la columna
-  const handleDrop = useCallback((event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    const taskId = event.dataTransfer.getData("text");
-    if (taskId) {
-      onTaskDrop(taskId);
-    } else {
-      console.error("Invalid taskId");
+    // Se utiliza `drop` y `ref` para conectar el contenedor del drop
+    const dropRef = (node: HTMLDivElement | null) => {
+      drop(node)
+      if (ref) {
+        if (typeof ref === 'function') {
+          ref(node)
+        } else {
+          ref.current = node
+        }
+      }
     }
-  }, [onTaskDrop]);
 
-  const validColumns = ["Pendiente", "En progreso", "Finalizado"];
-
-  if (!validColumns.includes(column)) {
-    console.error(`Invalid column: ${column}`);
-    return null;
-  }
-
-  return (
-    <div
-      className={`task-column ${column.toLowerCase().replace(" ", "-")}`}
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-      aria-labelledby={`${column}-column`}
-    >
-      <h2 id={`${column}-column`} className="task-column-title">
-        {column}
-      </h2>
-      <div className="task-list">
-        {tasks.length === 0 ? (
-          <p className="no-tasks">No hay procesos de momento...</p>
-        ) : (
-          tasks.map((task) => (
+    return (
+      <div
+        ref={dropRef} // Asigna la referencia combinada de `drop` y `forwardRef`
+        className="bg-gray-800 p-4 rounded-lg shadow flex-1 min-h-[300px]"
+      >
+        <h2 className="text-lg font-semibold mb-4 text-blue-400">{column}</h2>
+        <div className="space-y-2">
+          {tasks.map((task) => (
             <TaskCard
               key={task.id}
               task={task}
               onDelete={onDeleteTask}
               onEdit={onEditTask}
             />
-          ))
-        )}
+          ))}
+        </div>
       </div>
-    </div>
-  );
-};
+    )
+  }
+)
+
+// Añadiendo displayName para la depuración
+TaskColumn.displayName = 'TaskColumn'
+
+export default TaskColumn

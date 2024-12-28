@@ -1,84 +1,36 @@
-import { useState, useEffect } from "react";
-import { Task } from "../types/task";
-
-//  Hook personalizado para gestionar tareas en un tablero Kanban.
+import { useState, useCallback } from 'react'
+import { Task, ColumnType } from '@/types/task'
 
 export const useTaskManager = () => {
-  // Estado para almacenar las tareas
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([])
 
-  // Al montar el componente, carga las tareas desde el localStorage.
+  const addTask = useCallback((newTask: Omit<Task, 'id'>) => {
+    setTasks(prevTasks => [
+      ...prevTasks,
+      { ...newTask, id: Date.now().toString() }
+    ])
+  }, [])
 
-  useEffect(() => {
-    const savedTasks = localStorage.getItem("kanbanTasks");
-    if (savedTasks) {
-      setTasks(JSON.parse(savedTasks));
-    }
-  }, []);
+  const deleteTask = useCallback((taskId: string) => {
+    setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId))
+  }, [])
 
-  //  Cada vez que las tareas cambien, se guardan en el localStorage.
-
-  useEffect(() => {
-    localStorage.setItem("kanbanTasks", JSON.stringify(tasks));
-  }, [tasks]);
-
-  /**
-   * Añade una nueva tarea al estado.
-   * @param title - Título de la tarea.
-   * @param description - Descripción de la tarea.
-   * @param photoUrl - (Opcional) URL de la imagen asociada a la tarea.
-   */
-  const addTask = (
-    title: string,
-    description: string,
-    photoUrl?: string,
-    tags?: string[]
-  ) => {
-    const newTask: Task = {
-      id: Date.now().toString(),
-      title,
-      description,
-      columnId: "Pendiente",
-      photoUrl,
-      tags: tags || [],
-      date: ""
-    };
-    setTasks([...tasks, newTask]);
-  };
-
-  /**
-   * Elimina una tarea basada en su ID.
-   * @param taskId - ID de la tarea a eliminar.
-   */
-  const deleteTask = (taskId: string) => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
-  };
-
-  /**
-   * Mueve una tarea a otra columna.
-   * @param taskId - ID de la tarea a mover.
-   * @param columnId - ID de la columna destino.
-   */
-  const moveTask = (taskId: string, columnId: string) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === taskId ? { ...task, columnId } : task
+  const moveTask = useCallback((taskId: string, targetColumn: ColumnType) => {
+    setTasks(prevTasks =>
+      prevTasks.map(task =>
+        task.id === taskId ? { ...task, columnId: targetColumn } : task
       )
-    );
-  };
+    )
+  }, [])
 
-  /**
-   * Actualiza los datos de una tarea existente.
-   * @param updatedTask - Objeto que contiene los datos actualizados de la tarea.
-   */
-  const updateTask = (updatedTask: Task) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) =>
-        task.id === updatedTask.id ? { ...task, ...updatedTask } : task
+  const updateTask = useCallback((updatedTask: Task) => {
+    setTasks(prevTasks =>
+      prevTasks.map(task =>
+        task.id === updatedTask.id ? updatedTask : task
       )
-    );
-  };
+    )
+  }, [])
 
-  // Retornamos las funciones y el estado para su uso en los componentes.
-  return { tasks, addTask, deleteTask, moveTask, updateTask };
-};
+  return { tasks, addTask, deleteTask, moveTask, updateTask }
+}
+

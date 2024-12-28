@@ -1,24 +1,25 @@
-import { useState } from "react";
-import { Task } from "../types/task";
+import { useState } from 'react'
+import { Task } from '@/types/task'
 
 export const useTaskModal = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [taskToEdit, setTaskToEdit] = useState<Task | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [taskToEdit, setTaskToEdit] = useState<Task | null>(null)
 
   const openModal = (task: Task) => {
-    setTaskToEdit(task);
-    setIsModalOpen(true);
-  };
+    setTaskToEdit(task)
+    setIsModalOpen(true)
+  }
 
   const closeModal = () => {
-    setIsModalOpen(false);
-    setTaskToEdit(null);
-  };
+    setTaskToEdit(null)
+    setIsModalOpen(false)
+  }
 
   return {
     isModalOpen,
     taskToEdit,
     openModal,
-    closeModal,
-  };
-};
+    closeModal
+  }
+}
+

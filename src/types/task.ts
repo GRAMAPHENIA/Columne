@@ -1,9 +1,14 @@
 export interface Task {
-  date: string | number | Date;
   id: string;
   title: string;
   description: string;
-  columnId: string;
+  date: string;
+  tags: string[];
+  columnId: ColumnType;
   photoUrl?: string;
-  tags?: string[];
 }
+
+export type ColumnType = 'Pendiente' | 'En Progreso' | 'Finalizado';
+
+export const columns: ColumnType[] = ['Pendiente', 'En Progreso', 'Finalizado'];
+
