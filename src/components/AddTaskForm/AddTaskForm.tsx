@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Task } from "@/types/task";
 import { TagInput } from "./TagInput";
 import Image from "next/image";
+import UploadPhoto from "../icons/UploadPhoto";
 
 interface AddTaskFormProps {
   onAddTask: (task: Omit<Task, "id">) => void;
@@ -57,22 +58,22 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Título de la tarea"
-        className="w-full p-2 mb-2 border border-gray-700 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        className="w-full p-2 mb-4 border border-gray-700 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
         required
       />
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Descripción de la tarea"
-        className="w-full p-2 mb-2 border border-gray-700 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        className="w-full p-2 mb-4 border border-gray-700 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
         rows={3}
       />
       <TagInput tags={tags} setTags={setTags} />
-      <div className="mt-4">
+      <div className="mt-2">
         <label
           htmlFor="photo-upload"
-          className="block w-full text-center cursor-pointer text-blue-400 bg-gray-700 hover:bg-gray-600 px-4 py-3 rounded-lg shadow-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
-        >
+          className="block flex flex-col items-center justify-center w-full text-center cursor-pointer text-blue-400 bg-gray-700 hover:bg-gray-600 px-4 py-3 rounded-lg shadow-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+        ><UploadPhoto/>
           <span className="text-sm">Haz clic para subir una foto</span>
         </label>
         <input
@@ -90,7 +91,7 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
           height={300}
           src={photoUrl}
           alt="Vista previa"
-          className="mt-2 max-w-full h-32 object-cover rounded-lg"
+          className="mt-4 w-full h-32 object-cover rounded-lg"
         />
       )}
       <button

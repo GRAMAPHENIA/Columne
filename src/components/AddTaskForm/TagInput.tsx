@@ -26,21 +26,21 @@ export const TagInput: React.FC<TagInputProps> = ({ tags, setTags }) => {
   }
 
   return (
-    <div>
+    <div className='space-y-4 mb-4'>
       <div className="flex items-center space-x-3 mb-2">
         <input
           type="text"
           value={tagInput}
           onChange={(e) => setTagInput(e.target.value)}
           placeholder="Agregar etiqueta"
-          className="flex-1 p-2 border border-gray-700 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-purple-500 focus:outline-none"
+          className="flex-1 p-2 border border-gray-700 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
           aria-label="Agregar etiqueta"
         />
         <button
           type="button"
           onClick={handleAddTag}
           disabled={!tagInput.trim()}
-          className={`px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:ring-2 focus:ring-purple-400 focus:outline-none ${
+          className={`px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-400 focus:outline-none ${
             !tagInput.trim() ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           aria-label="Añadir etiqueta"
@@ -52,13 +52,13 @@ export const TagInput: React.FC<TagInputProps> = ({ tags, setTags }) => {
         {tags.map((tag) => (
           <span
             key={tag}
-            className="flex items-center px-3 py-1 text-sm bg-purple-600 text-white rounded-lg"
+            className="flex items-center font-bold px-3  text-sm bg-blue-600 text-white/70 rounded-full"
             role="listitem"
           >
             {tag}
             <button
               onClick={() => handleDeleteTag(tag)}
-              className="ml-2 text-white bg-red-600 rounded-full p-1 hover:bg-red-700"
+              className="ml-1 text-xl text-white/50  hover:text-red-300 font-bold"
               aria-label={`Eliminar etiqueta ${tag}`}
             >
               ×

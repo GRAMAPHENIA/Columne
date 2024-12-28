@@ -46,7 +46,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr); /* 7 columnas */
   grid-template-rows: repeat(5, 1fr); /* 6 filas fijas */
-  gap: 4; /* Sin espacios */
+  gap: 4px; /* Sin espacios */
   flex: 1;
   width: 100%;
   height: calc(100% - 60px); /* Espacio dinámico para las celdas */
