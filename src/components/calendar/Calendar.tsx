@@ -51,8 +51,8 @@ const Calendar: React.FC<CalendarProps> = ({ tasks }) => {
   };
 
   return (
-    <div className={styles.calendarContainer}>
-      <div className={styles.header}>
+    <div className={`${styles.calendarContainer} border border-gray-700`}>
+      <div className={`${styles.header} col-span-1 bg-slate-600/10 border-gray-700 border border p-6 rounded-lg`}>
         <button
           onClick={() =>
             setCurrentDate(

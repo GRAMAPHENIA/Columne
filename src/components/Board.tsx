@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useTaskManager } from "../hooks/useTaskManager";
-import { TaskColumn } from "./tasks/task-column/TaskColumn";
+import { TaskColumn } from "@/components/tasks/task-column/TaskColumn";
 import { columns } from "@/data/columns";
 import { useTaskModal } from "@/hooks/useTaskModal";
 import { EditTaskModal } from "./tasks/EditTaskModal";
@@ -19,19 +19,19 @@ const Board: React.FC = () => {
   };
 
   return (
-    <div className="kanban-container flex flex-col p-4">
+    <div className="flex flex-col p-10 rounded-lg shadow-lg antialiased bw-full max-w-6xl mx-auto">
       <div className="flex flex-row space-x-4">
         {/* Formulario para añadir tareas */}
         <AddTaskForm onAddTask={addTask} />
       </div>
-      {/* Tablero Kanban */}
-      <div className="kanban-board flex space-x-4 w-full max-w-6xl">
+      {/* Columnas */}
+      <div className="flex space-x-4 w-full max-w-6xl">
         {columns.map((column) => (
           <TaskColumn
             key={column}
             column={column}
             tasks={tasks.filter((task) => task.columnId === column)}
-            onTaskDrop={(taskId) => moveTask(taskId, column)}
+            onTaskDrop={(taskId: string) => moveTask(taskId, column)}
             onDeleteTask={deleteTask}
             onEditTask={openModal} // Pasamos la función para editar
           />

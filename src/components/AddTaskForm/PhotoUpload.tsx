@@ -13,10 +13,17 @@ export const PhotoUpload: React.FC<PhotoUploadProps> = ({
 }) => {
   const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
-    setPhoto(file);
-    if (file) {
-      setPhotoPreview(URL.createObjectURL(file));
+
+    // Si el archivo existe y es una imagen
+    if (file && file.type.startsWith("image/")) {
+      setPhoto(file);
+      const objectURL = URL.createObjectURL(file);
+      setPhotoPreview(objectURL);
+      
+      // Liberar la URL del objeto cuando no sea necesario
+      return () => URL.revokeObjectURL(objectURL); // Limpiar URL cuando ya no sea necesario
     } else {
+      setPhoto(null);
       setPhotoPreview(null);
     }
   };
@@ -30,6 +37,7 @@ export const PhotoUpload: React.FC<PhotoUploadProps> = ({
       >
         <div className="flex flex-col justify-center items-center">
           <UploadPhoto />
+          <span className="text-sm mt-2">Haz clic para subir una foto</span>
         </div>
       </label>
       <input
