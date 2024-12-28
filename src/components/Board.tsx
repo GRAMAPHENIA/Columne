@@ -22,7 +22,7 @@ const Board: React.FC = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="flex flex-col p-5 rounded-lg shadow-lg antialiased bg-gray-900 w-full max-w-6xl mx-auto">
+      <div className="flex flex-col p-5 rounded-lg shadow-lg antialiased bg-slate-700/20 w-full max-w-6xl mx-auto">
         <div className="flex flex-row space-x-4 mb-6">
           <AddTaskForm onAddTask={addTask} />
           <Calendar tasks={tasks} />

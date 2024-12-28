@@ -73,7 +73,7 @@ const Calendar: React.FC<CalendarProps> = ({ tasks }) => {
   };
 
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-full">
+    <div className="bg-slate-800 p-6 rounded-lg shadow-lg w-full">
       <h2 className="text-xl font-bold mb-6 text-teal-400">
         Contribuciones Anuales
       </h2>
@@ -105,12 +105,12 @@ const Calendar: React.FC<CalendarProps> = ({ tasks }) => {
           ({ date, intensity, taskCount }, dayIndex) => (
             <div
               key={dayIndex}
-              className="w-16 h-16 rounded-md border border-gray-700/50 flex items-center justify-center cursor-pointer backdrop-blur-xl"
+              className="w-16 h-16 rounded-md border border-gray-600/70 flex items-center justify-center cursor-pointer backdrop-blur-xl"
               style={{
                 backgroundColor:
                   intensity === 0
-                    ? "#1d4047" // Color de fondo cuando no hay tareas (verde oscuro)
-                    : `rgba(66, 153, 125, ${Math.min(intensity * 1.5, 1)})`, // Verde azulado suave
+                    ? "#2a4050" // Color de fondo cuando no hay tareas (verde oscuro)
+                    : `rgba(100, 153, 125, ${Math.min(intensity * 1.5, 1)})`, // Verde azulado suave
               }}
               onMouseEnter={(e) => handleMouseEnter(date, taskCount, e)}
               onMouseLeave={handleMouseLeave}
@@ -123,7 +123,7 @@ const Calendar: React.FC<CalendarProps> = ({ tasks }) => {
 
       {tooltipContent && (
         <div
-          className="absolute bg-teal-800 border border-teal-700 text-teal-300 p-2 rounded shadow-lg text-sm"
+          className="absolute bg-slate-800 border border-slate-700 text-slate-300 p-2 rounded shadow-lg text-sm"
           style={{
             left: `${tooltipPosition.x}px`,
             top: `${tooltipPosition.y}px`,

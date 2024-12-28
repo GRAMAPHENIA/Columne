@@ -35,7 +35,7 @@ const TaskColumn = forwardRef<HTMLDivElement, TaskColumnProps>(
     return (
       <div
         ref={dropRef} // Asigna la referencia combinada de `drop` y `forwardRef`
-        className="bg-gray-800 p-4 rounded-lg shadow flex-1 min-h-[300px]"
+        className="bg-slate-800 p-4 rounded-lg shadow flex-1 min-h-[300px]"
       >
         <h2 className="text-lg font-semibold mb-4 text-blue-400">{column}</h2>
         <div className="space-y-2">

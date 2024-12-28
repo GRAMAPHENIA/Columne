@@ -48,7 +48,7 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-gray-800 p-6 rounded-lg shadow-lg w-full"
+      className="bg-slate-800 p-6 rounded-lg shadow-lg w-full"
     >
       <h2 className="text-xl font-bold mb-6 text-blue-400">
         Añadir Nueva Tarea
@@ -58,21 +58,21 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Título de la tarea"
-        className="w-full p-2 mb-4 border border-gray-700 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        className="w-full p-2 mb-4 border border-slate-700 rounded-lg bg-slate-700 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
         required
       />
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Descripción de la tarea"
-        className="w-full p-2 mb-4 border border-gray-700 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
+        className="w-full p-2 mb-4 border border-slate-700 rounded-lg bg-slate-700 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
         rows={3}
       />
       <TagInput tags={tags} setTags={setTags} />
       <div className="mt-2">
         <label
           htmlFor="photo-upload"
-          className="block flex flex-col items-center justify-center w-full text-center cursor-pointer text-blue-400 bg-gray-700 hover:bg-gray-600 px-4 py-3 rounded-lg shadow-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
+          className="block flex flex-col items-center justify-center w-full text-center cursor-pointer text-blue-400 bg-slate-700 hover:bg-slate-600 px-4 py-3 rounded-lg shadow-md focus:ring-2 focus:ring-slate-400 focus:outline-none"
         ><UploadPhoto/>
           <span className="text-sm">Haz clic para subir una foto</span>
         </label>
