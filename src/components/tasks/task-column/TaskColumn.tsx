@@ -1,33 +1,38 @@
-import { ColumnType, Task } from "@/types/task";
-import { forwardRef } from "react";
-import { useDrop } from "react-dnd";
-import { TaskCard } from "../TaskCard";
+// Ruta: src/components/tasks/TaskColumn.tsx
 
-// Componente para representar columnas de tareas
+import { ColumnType, Task } from "@/types/task"; 
+import { forwardRef } from "react"; 
+import { useDrop } from "react-dnd"; 
+import { TaskCard } from "../TaskCard"; 
+import "./TaskColumn.css"; 
+
+// Propiedades esperadas para el componente TaskColumn
 interface TaskColumnProps {
   column: ColumnType;
-  tasks: Task[];
-  onMoveTask: (taskId: string, targetColumn: ColumnType) => void;
-  onDeleteTask: (taskId: string) => void;
-  onEditTask: (task: Task) => void;
+  tasks: Task[]; // Lista de tareas asociadas a la columna
+  onMoveTask: (taskId: string, targetColumn: ColumnType) => void; // Función para mover una tarea entre columnas
+  onDeleteTask: (taskId: string) => void; // Función para eliminar una tarea
+  onEditTask: (task: Task) => void; // Función para editar una tarea
 }
 
+// Componente para representar columnas de tareas
 const TaskColumn = forwardRef<HTMLDivElement, TaskColumnProps>(
   ({ column, tasks, onMoveTask, onDeleteTask, onEditTask }, ref) => {
+    // Configuración del área de drop (donde se pueden soltar tareas)
     const [, drop] = useDrop({
-      accept: "TASK", // Acepta tareas para dropear
+      accept: "TASK", // Define que tipo de elementos acepta (en este caso, tareas)
       drop: (item: { id: string }) => {
         if (item?.id) {
-          onMoveTask(item.id, column);
+          onMoveTask(item.id, column); // Mueve la tarea al dropearla en esta columna
         } else {
           console.warn("No se pudo mover la tarea porque falta el ID.");
         }
       },
     });
 
-    // Ref combinada para forwardRef y drop
+    // Combina la referencia de forwardRef y la de drop
     const dropRef = (node: HTMLDivElement | null) => {
-      drop(node);
+      drop(node); // Conecta el área de drop
       if (ref) {
         if (typeof ref === "function") {
           ref(node);
@@ -39,25 +44,31 @@ const TaskColumn = forwardRef<HTMLDivElement, TaskColumnProps>(
 
     return (
       <div
-        ref={dropRef}
-        className="bg-slate-800 p-4 rounded-lg shadow flex-1 min-h-[300px]"
+        ref={dropRef} // Asigna la referencia combinada
+        className={`task-column ${column.toLowerCase() || "default"}`} // Asigna la clase CSS según la columna
       >
-        <h2 className="text-lg font-semibold mb-4 text-blue-400">{column}</h2>
-        <div className="space-y-2">
-          {tasks.map((task) => (
-            <TaskCard
-              key={task.id}
-              task={task}
-              onDelete={onDeleteTask}
-              onEdit={onEditTask}
-            />
-          ))}
+        <h2 className="task-column-title">{column}</h2>{" "}
+        {/* Título de la columna */}
+        <div className="task-list">
+          {tasks.length > 0 ? (
+            tasks.map((task) => (
+              <TaskCard
+                key={task.id} // Llave única para identificar cada tarea
+                task={task} // Información de la tarea
+                onDelete={onDeleteTask} // Función para eliminar la tarea
+                onEdit={onEditTask} // Función para editar la tarea
+              />
+            ))
+          ) : (
+            <p className="no-tasks">No hay tareas</p> // Mensaje si no hay tareas
+          )}
         </div>
       </div>
     );
   }
 );
 
+// Define el nombre del componente para herramientas de depuración
 TaskColumn.displayName = "TaskColumn";
 
 export default TaskColumn;

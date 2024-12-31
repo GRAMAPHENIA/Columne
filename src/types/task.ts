@@ -8,7 +8,7 @@ export interface Task {
   photoUrl?: string | null;
 }
 
-export type ColumnType = 'Pendiente' | 'En Progreso' | 'Finalizado';
+export type ColumnType = 'Pendiente' | 'Progreso' | 'Finalizado';
 
-export const columns: ColumnType[] = ['Pendiente', 'En Progreso', 'Finalizado'];
+export const columns: ColumnType[] = ['Pendiente', 'Progreso', 'Finalizado'];
 
