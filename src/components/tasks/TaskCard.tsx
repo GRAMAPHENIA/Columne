@@ -56,11 +56,11 @@ export const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete, onEdit }) =>
           height={200}
           src={task.photoUrl}
           alt={task.title}
-          className="w-full h-32 object-cover rounded-md mb-4"
+          className="w-full h-32 object-cover rounded-md mb-4 shadow-md border border-slate-700"
         />
       )}
-      <h3 className="font-semibold text-white">{task.title}</h3>
-      <p className="text-sm text-gray-300">{task.description}</p>
+      <h3 className="font-semibold text-blue-200">{task.title}</h3>
+      <p className="font-extralight text-sm text-gray-300">{task.description}</p>
 
       {task.tags && task.tags.length > 0 && (
         <div className="flex flex-wrap gap-2 mt-3">

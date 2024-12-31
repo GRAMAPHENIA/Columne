@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Task } from "@/types/task";
 import { TagInput } from "@/components/AddTaskForm/TagInput";
 import Image from "next/image";
@@ -18,8 +18,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
   onSave,
 }) => {
   const [editedTask, setEditedTask] = useState<Task | null>(null);
-  const [previewPhoto, setPreviewPhoto] = useState<string | null>(null); // Estado para la imagen
-  const fileInputRef = useRef<HTMLInputElement>(null); // Referencia al input de archivo
+  const [previewPhoto, setPreviewPhoto] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const inputClasses =
     "w-full p-2 mb-2 border border-gray-700 rounded-lg bg-gray-700 text-white focus:ring-2 focus:ring-blue-500 focus:outline-none";
@@ -27,18 +27,32 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
   useEffect(() => {
     if (task) {
       setEditedTask({ ...task });
-      setPreviewPhoto(task.photoUrl || null); // Inicializa la imagen con la URL de la tarea (si existe)
+      setPreviewPhoto(task.photoUrl || null);
     }
   }, [task]);
 
+  // Usamos useCallback para estabilizar la función onClose
+  const stableOnClose = useCallback(onClose, [onClose]);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") stableOnClose();
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [onClose]);
+
+    // Desactiva el scroll de la página cuando el modal está abierto
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = ""; // Restaura el scroll al cerrar el modal
+    };
+  }, [isOpen, stableOnClose]); // Aquí usamos stableOnClose
 
   if (!isOpen || !editedTask) return null;
 
@@ -63,8 +77,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
       alert("El título no puede estar vacío.");
       return;
     }
-    onSave({ ...editedTask, photoUrl: previewPhoto }); // Guarda la imagen junto con los otros datos solo en el modal
-    onClose(); // Cierra el modal
+    onSave({ ...editedTask, photoUrl: previewPhoto });
+    stableOnClose();
   };
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +86,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreviewPhoto(reader.result as string); // Actualiza la vista previa de la imagen solo en el modal
+        setPreviewPhoto(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
@@ -80,12 +94,14 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 bg-gray-950 bg-opacity-80 backdrop-blur-2xl flex justify-center items-center"
+      className="fixed inset-0 bg-gray-950 bg-opacity-80 backdrop-blur-2xl flex justify-center items-center z-50"
       role="dialog"
       aria-labelledby="edit-task-title"
       aria-modal="true"
     >
-      <div className="bg-gray-800 p-6 rounded-lg w-full max-w-md">
+      <div
+        className="bg-gray-800 p-6 rounded-lg w-full max-w-lg max-h-screen overflow-y-auto shadow-md border border-slate-700"
+      >
         <h2
           id="edit-task-title"
           className="text-xl font-bold mb-4 text-blue-400"
@@ -112,9 +128,9 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
         <div className="mt-4">
           <label
             htmlFor="photo-reupload"
-            className="block flex flex-col items-center justify-center w-full text-center cursor-pointer text-blue-400 bg-slate-700 hover:bg-slate-600 px-4 py-3 rounded-lg shadow-md focus:ring-2 focus:ring-slate-400 focus:outline-none"
+            className="flex flex-col items-center justify-center w-full text-center cursor-pointer text-blue-400 bg-slate-700 hover:bg-slate-600 px-4 py-3 rounded-lg shadow-md focus:ring-2 focus:ring-slate-400 focus:outline-none"
           >
-            <UploadPhoto/>
+            <UploadPhoto />
             Cambiar Foto
           </label>
           <input
@@ -139,7 +155,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
 
         <div className="mt-4 flex justify-end">
           <button
-            onClick={onClose}
+            onClick={stableOnClose}
             className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 focus:ring-2 focus:ring-gray-400 focus:outline-none mr-2"
           >
             Cancelar
