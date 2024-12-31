@@ -29,3 +29,8 @@ body {
   transform: scale(1.05);
 }
 
+.dragging {
+  opacity: 0.5;
+  outline: 2px dashed #003a75af;
+}
+

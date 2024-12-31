@@ -1,40 +1,45 @@
-import React, { forwardRef } from 'react'
-import { useDrop } from 'react-dnd'
-import { TaskCard } from '@/components/tasks/TaskCard'
-import { Task, ColumnType } from '@/types/task'
+import { ColumnType, Task } from "@/types/task";
+import { forwardRef } from "react";
+import { useDrop } from "react-dnd";
+import { TaskCard } from "../TaskCard";
 
+// Componente para representar columnas de tareas
 interface TaskColumnProps {
-  column: ColumnType
-  tasks: Task[]
-  onMoveTask: (taskId: string, targetColumn: ColumnType) => void
-  onDeleteTask: (taskId: string) => void
-  onEditTask: (task: Task) => void
+  column: ColumnType;
+  tasks: Task[];
+  onMoveTask: (taskId: string, targetColumn: ColumnType) => void;
+  onDeleteTask: (taskId: string) => void;
+  onEditTask: (task: Task) => void;
 }
 
 const TaskColumn = forwardRef<HTMLDivElement, TaskColumnProps>(
   ({ column, tasks, onMoveTask, onDeleteTask, onEditTask }, ref) => {
     const [, drop] = useDrop({
-      accept: 'TASK',
+      accept: "TASK", // Acepta tareas para dropear
       drop: (item: { id: string }) => {
-        onMoveTask(item.id, column)
-      },
-    })
-
-    // Se utiliza `drop` y `ref` para conectar el contenedor del drop
-    const dropRef = (node: HTMLDivElement | null) => {
-      drop(node)
-      if (ref) {
-        if (typeof ref === 'function') {
-          ref(node)
+        if (item?.id) {
+          onMoveTask(item.id, column);
         } else {
-          ref.current = node
+          console.warn("No se pudo mover la tarea porque falta el ID.");
+        }
+      },
+    });
+
+    // Ref combinada para forwardRef y drop
+    const dropRef = (node: HTMLDivElement | null) => {
+      drop(node);
+      if (ref) {
+        if (typeof ref === "function") {
+          ref(node);
+        } else if ("current" in ref) {
+          ref.current = node;
         }
       }
-    }
+    };
 
     return (
       <div
-        ref={dropRef} // Asigna la referencia combinada de `drop` y `forwardRef`
+        ref={dropRef}
         className="bg-slate-800 p-4 rounded-lg shadow flex-1 min-h-[300px]"
       >
         <h2 className="text-lg font-semibold mb-4 text-blue-400">{column}</h2>
@@ -49,11 +54,10 @@ const TaskColumn = forwardRef<HTMLDivElement, TaskColumnProps>(
           ))}
         </div>
       </div>
-    )
+    );
   }
-)
+);
 
-// Añadiendo displayName para la depuración
-TaskColumn.displayName = 'TaskColumn'
+TaskColumn.displayName = "TaskColumn";
 
-export default TaskColumn
+export default TaskColumn;

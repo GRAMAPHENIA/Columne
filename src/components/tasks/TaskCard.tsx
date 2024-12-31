@@ -1,58 +1,52 @@
 import React, { useState, useRef } from "react";
+import { useDrag } from "react-dnd";
+import Image from "next/image";
 import { Task } from "@/types/task";
 import TrashIcon from "@/components/icons/Trash";
 import Pencil from "@/components/icons/Pencil";
-import Image from "next/image";
 
+// Componente para representar cada tarea
 interface TaskCardProps {
   task: Task;
   onDelete: (taskId: string) => void;
   onEdit: (task: Task) => void;
 }
 
-export const TaskCard: React.FC<TaskCardProps> = ({
-  task,
-  onDelete,
-  onEdit,
-}) => {
+export const TaskCard: React.FC<TaskCardProps> = ({ task, onDelete, onEdit }) => {
   const [message, setMessage] = useState<string | null>(null);
-  const taskCardRef = useRef<HTMLDivElement>(null); // Usamos un ref para el div
 
-  const handleDragStart = (
-    event: React.DragEvent<HTMLElement>, // Usamos el tipo más general para el evento
-    taskId: string
-  ) => {
-    if (taskCardRef.current) {
-      taskCardRef.current.classList.add("dragging"); // Accedemos al div usando ref
-    }
-    event.dataTransfer.setData("text/plain", taskId);
-  };
+  // Integración con react-dnd para arrastrar tareas
+  const [{ isDragging }, dragRef] = useDrag(() => ({
+    type: "TASK", // Tipo de elemento para react-dnd
+    item: { id: task.id }, // Datos enviados al soltar el elemento
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(), // Estado de arrastre
+    }),
+  }));
 
-  const handleDragEnd = () => {
-    if (taskCardRef.current) {
-      taskCardRef.current.classList.remove("dragging"); // Accedemos al div usando ref
-    }
+  // Referencia local combinada con dragRef
+  const localRef = useRef<HTMLElement>(null);
+  const combinedRef = (node: HTMLElement | null) => {
+    dragRef(node);
+    localRef.current = node;
   };
 
   const handleDelete = (taskId: string) => {
     try {
-      onDelete(taskId); // Eliminar tarea
-      setMessage("Tarea eliminada con éxito."); // Mensaje de éxito
+      onDelete(taskId);
+      setMessage("Tarea eliminada con éxito.");
     } catch {
-      setMessage("Hubo un error al eliminar la tarea."); // Mensaje de error
+      setMessage("Hubo un error al eliminar la tarea.");
     }
-
-    // Borrar el mensaje después de 3 segundos
-    setTimeout(() => setMessage(null), 3000);
+    setTimeout(() => setMessage(null), 3000); // Limpiar mensaje después de 3 segundos
   };
 
   return (
     <article
-      ref={taskCardRef} // Asignamos el ref aquí
-      className="kanban-task transition-all bg-gray-900/30 hover:bg-gray-800/50 p-4 rounded-lg shadow-md cursor-move my-4 border border-gray-700/50"
-      draggable
-      onDragStart={(event) => handleDragStart(event, task.id)}
-      onDragEnd={handleDragEnd}
+      ref={combinedRef}
+      className={` kanban-task transition-all bg-gray-900/30 hover:bg-gray-800/50 p-4 rounded-lg shadow-md cursor-move my-4 border border-gray-700/50 ${
+        isDragging ? "opacity-10 dragging" : ""
+      }`}
       role="listitem"
       aria-label={`Tarea ${task.title}`}
     >
@@ -97,6 +91,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
           <TrashIcon />
         </button>
       </div>
+
       {message && (
         <div
           className="mt-2 text-sm text-white bg-gray-700 p-2 rounded"
@@ -108,3 +103,4 @@ export const TaskCard: React.FC<TaskCardProps> = ({
     </article>
   );
 };
+
