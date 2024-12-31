@@ -21,7 +21,7 @@ body {
 }
 
 .kanban-task {
-  transition: opacity 0.2s, transform 0.2s;
+  transition: transform 0.2s ease, opacity 0.3s ease-in-out;
 }
 
 .kanban-task.dragging {
