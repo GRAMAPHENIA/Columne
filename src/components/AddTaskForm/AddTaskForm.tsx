@@ -108,7 +108,7 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ onAddTask }) => {
       <div className="mt-2">
         <label
           htmlFor="photo-upload"
-          className="block flex flex-col items-center justify-center w-full text-center cursor-pointer text-blue-400 bg-slate-700 hover:bg-slate-600 px-4 py-3 rounded-lg shadow-md focus:ring-2 focus:ring-slate-400 focus:outline-none"
+          className="flex flex-col items-center justify-center w-full text-center cursor-pointer text-blue-400 bg-slate-700 hover:bg-slate-600 px-4 py-3 rounded-lg shadow-md focus:ring-2 focus:ring-slate-400 focus:outline-none"
         >
           <UploadPhoto /> {/* Icono para la carga de foto */}
           <span className="text-sm">Haz clic para subir una foto</span>
