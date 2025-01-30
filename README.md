@@ -1,4 +1,4 @@
-# Economicron
+# Columne
 
 Economicron es una aplicación simple pero efectiva que te permite gestionar tareas y organizarlas según su prioridad. Con esta herramienta, podés agregar tareas, ordenarlas según su importancia y llevar un control de su progreso de manera intuitiva.
 
