@@ -75,7 +75,7 @@ const Calendar: React.FC<CalendarProps> = ({ tasks }) => {
   return (
     <div className="bg-slate-800 p-6 rounded-lg shadow-lg w-full">
       <h2 className="text-xl font-bold mb-6 text-teal-400">
-        Contribuciones Anuales
+        Contribuciones
       </h2>
 
       <div className="flex justify-between mb-4">
