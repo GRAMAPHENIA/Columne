@@ -1,6 +1,6 @@
 # Columne
 
-Economicron es una aplicación simple pero efectiva que te permite gestionar tareas y organizarlas según su prioridad. Con esta herramienta, podés agregar tareas, ordenarlas según su importancia y llevar un control de su progreso de manera intuitiva.
+Columne es una aplicación simple pero efectiva que te permite gestionar tareas y organizarlas según su prioridad. Con esta herramienta, podés agregar tareas, ordenarlas según su importancia y llevar un control de su progreso de manera intuitiva.
 
 ## Características
 
@@ -12,7 +12,7 @@ Economicron es una aplicación simple pero efectiva que te permite gestionar tar
 
 ## Tecnologías utilizadas
 
-Economicron está desarrollado con las siguientes tecnologías:
+Columne está desarrollado con las siguientes tecnologías:
 
 - **Next.js 15**: Framework de React para aplicaciones optimizadas.
 - **React 19**: Biblioteca para la construcción de interfaces de usuario.
@@ -24,8 +24,8 @@ Economicron está desarrollado con las siguientes tecnologías:
 
 1. Cloná el repositorio:
    ```sh
-   git clone https://github.com/GRAMAPHENIA/economicron.git
-   cd economicron
+   git clone https://github.com/GRAMAPHENIA/Columne.git
+   cd Columne
    ```
 2. Instalá las dependencias:
    ```sh
@@ -46,7 +46,7 @@ Economicron está desarrollado con las siguientes tecnologías:
 
 ## Contribuciones
 
-Si querés mejorar Economicron, ¡toda ayuda es bienvenida! Podés hacer un fork del proyecto, agregar mejoras y enviar un pull request.
+Si querés mejorar Columne, ¡toda ayuda es bienvenida! Podés hacer un fork del proyecto, agregar mejoras y enviar un pull request.
 
 ## Licencia
 
